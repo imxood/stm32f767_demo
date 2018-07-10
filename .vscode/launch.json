@@ -1,0 +1,34 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "stm32 debug",
+            "type": "cppdbg",
+            "request": "launch",
+            "targetArchitecture": "arm",
+            "program": "${workspaceFolder}/build/${workspaceFolderBasename}.elf",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "${env:HOME}/programs/gcc-arm-none-eabi-7/bin/arm-none-eabi-gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                { "text": "file ${workspaceFolder}/build/${workspaceFolderBasename}.elf"},
+                { "text": "set remotetimeout 30" },
+                { "text": "target remote localhost:3333" },
+                // { "text": "monitor reset" },
+                { "text": "monitor halt" },
+                { "text": "monitor reset init" },
+                { "text": "load" },
+                { "text": "info target" }
+            ]
+        }
+    ]
+}

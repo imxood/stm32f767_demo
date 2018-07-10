@@ -1,0 +1,48 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true
+    },
+    "tasks": [
+        {
+            "label": "openocd",
+            "command": "/usr/local/bin/openocd",
+            "args": [
+                "-f",
+                "/usr/local/share/openocd/scripts/interface/stlink.cfg",
+                "-f",
+                "/usr/local/share/openocd/scripts/target/stm32f7x.cfg"
+            ],
+            "dependsOn":[
+                "make -j4"
+            ],
+            "type": "shell",
+        },
+        {
+            "label": "make -j4",
+            "command": "make",
+            "args": [
+                "-j4",
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "type": "process",
+        },
+        {
+            "label": "make clean",
+            "command": "make",
+            "args": [
+                "clean",
+            ],
+            "type": "process",
+        }
+    ]
+}
